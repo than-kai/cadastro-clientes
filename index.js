@@ -1,36 +1,28 @@
 const Endereco = require("./Endereco");
-const PessoaFisica = require("./PessoaFisica");
+const PessoaJuridica = require("./PessoaJuridica");
 
-const endereco = new Endereco("Rua das Flores", "123", "Bragança Paulista", "SP");
+const endereco = new Endereco("Av. Brasil", "500", "Campinas", "SP");
 
-// Teste 1: pessoa física válida (CPF com pontos e traço)
+// Teste 1: pessoa jurídica válida (CNPJ com pontos, barra e traço)
 try {
-  const pf = new PessoaFisica("Maria Silva", endereco, "123.456.789-09", "2000-05-20");
-  pf.exibir();
+  const pj = new PessoaJuridica("Tech Peças", endereco, "12.345.678/0001-90", "Tech Peças Ltda");
+  pj.exibir();
 } catch (erro) {
   console.log("Erro: " + erro.message);
 }
 
-// Teste 2: CPF inválido
+// Teste 2: CNPJ inválido
 try {
-  const pf = new PessoaFisica("João Souza", endereco, "123.456", "1990-01-15");
-  pf.exibir();
+  const pj = new PessoaJuridica("Loja Alfa", endereco, "12.345.678", "Loja Alfa Ltda");
+  pj.exibir();
 } catch (erro) {
   console.log("Erro: " + erro.message);
 }
 
-// Teste 3: data inválida
+// Teste 3: razão social vazia
 try {
-  const pf = new PessoaFisica("Ana Lima", endereco, "12345678909", "abc");
-  pf.exibir();
-} catch (erro) {
-  console.log("Erro: " + erro.message);
-}
-
-// Teste 4: data no futuro
-try {
-  const pf = new PessoaFisica("Pedro Costa", endereco, "12345678909", "2099-01-01");
-  pf.exibir();
+  const pj = new PessoaJuridica("Loja Beta", endereco, "12345678000190", "   ");
+  pj.exibir();
 } catch (erro) {
   console.log("Erro: " + erro.message);
 }
