@@ -1,7 +1,9 @@
 # Cadastro de Clientes - Appfull / Electronic
 
 **Aluno:** Nathan Paiva Franco
+
 **Curso / Unidade Curricular:** Desenvolvimento Mobile Flutter / POO
+
 **Data:**  14/11/2026
 
 ## Sobre o projeto
