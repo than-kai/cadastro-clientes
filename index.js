@@ -1,30 +1,52 @@
 const Endereco = require("./Endereco");
+const PessoaFisica = require("./PessoaFisica");
 const PessoaJuridica = require("./PessoaJuridica");
 
-const endereco = new Endereco("Av. Brasil", "500", "Campinas", "SP");
+const clientes = [];
 
-// Teste 1: pessoa jurídica válida (CNPJ com pontos, barra e traço)
+console.log("=== Cenário 1: Pessoa física válida ===");
 try {
+  const endereco = new Endereco("Rua das Flores", "123", "Bragança Paulista", "SP");
+  const pf = new PessoaFisica("Maria Silva", endereco, "123.456.789-09", "2000-05-20");
+  clientes.push(pf);
+  console.log("Cadastro realizado com sucesso.");
+} catch (erro) {
+  console.log("Erro no cadastro: " + erro.message);
+}
+
+console.log("\n=== Cenário 2: Pessoa jurídica válida ===");
+try {
+  const endereco = new Endereco("Av. Brasil", "500", "Campinas", "SP");
   const pj = new PessoaJuridica("Tech Peças", endereco, "12.345.678/0001-90", "Tech Peças Ltda");
-  pj.exibir();
+  clientes.push(pj);
+  console.log("Cadastro realizado com sucesso.");
 } catch (erro) {
-  console.log("Erro: " + erro.message);
+  console.log("Erro no cadastro: " + erro.message);
 }
 
-// Teste 2: CNPJ inválido
+console.log("\n=== Cenário 3: Pessoa física inválida (CPF incompleto) ===");
 try {
-  const pj = new PessoaJuridica("Loja Alfa", endereco, "12.345.678", "Loja Alfa Ltda");
-  pj.exibir();
+  const endereco = new Endereco("Rua Verde", "45", "Atibaia", "SP");
+  const pf = new PessoaFisica("João Souza", endereco, "123.456", "1990-01-15");
+  clientes.push(pf);
+  console.log("Cadastro realizado com sucesso.");
 } catch (erro) {
-  console.log("Erro: " + erro.message);
+  console.log("Erro no cadastro: " + erro.message);
 }
 
-// Teste 3: razão social vazia
+console.log("\n=== Cenário 4: Pessoa jurídica inválida (razão social vazia) ===");
 try {
+  const endereco = new Endereco("Rua Azul", "78", "Jundiaí", "SP");
   const pj = new PessoaJuridica("Loja Beta", endereco, "12345678000190", "   ");
-  pj.exibir();
+  clientes.push(pj);
+  console.log("Cadastro realizado com sucesso.");
 } catch (erro) {
-  console.log("Erro: " + erro.message);
+  console.log("Erro no cadastro: " + erro.message);
 }
 
-console.log("O programa continuou rodando.");
+console.log("\n=== Clientes cadastrados (somente válidos) ===");
+for (const cliente of clientes) {
+  cliente.exibir();
+  console.log("---");
+}
+console.log("Total de clientes válidos: " + clientes.length);
